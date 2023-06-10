@@ -6,7 +6,7 @@ class UserService {
         this.userRepository = userRepository;
     }
 
-    async execute({ name, email, password }) {
+    async execute({ name, email, password, role }) {
         const checkUserExists = await this.userRepository.findByEmail(email);
 
         if (checkUserExists.length != 0) {
@@ -15,8 +15,12 @@ class UserService {
 
         const hashedPassword = await hash(password, 8);
 
-        const newUser = await this.userRepository.create({ name, email, password: hashedPassword });
+        await this.userRepository.create({ name, email, hashedPassword, role });
 
+    }
+
+    async addMealToFavorite({meal_id, user_id}) {
+        await this.userRepository.addMealToFavorite({meal_id, user_id});   
     }
 }
 

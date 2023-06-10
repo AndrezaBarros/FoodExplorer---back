@@ -6,7 +6,7 @@ exports.up = knex => knex.schema.createTable("meals", table => {
     table.text("category");
     table.float("price").notNull();
 
-    table.text("created_by").references("id").inTable("user");
+    table.integer("created_by").references("id").inTable("users");
 })
 
 exports.down = knex => knex.schema.dropTable("meals");
