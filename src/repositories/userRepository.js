@@ -6,18 +6,18 @@ class UserRepository {
         return checkUserExists;
     }
 
-    async create({name, email, hashedPassword, role}) {
+    async create({ name, email, hashedPassword, type }) {
         const newUser = await knex("users").insert({
             name: name,
             email: email,
             password: hashedPassword,
-            role: role
+            type: type
         });
 
         return newUser;
     }
-    
-    async addMealToFavorite({meal_id, user_id}) {
+
+    async addMealToFavorite({ meal_id, user_id }) {
         await knex("favorite_foods").insert({
             user_id,
             meal_id
