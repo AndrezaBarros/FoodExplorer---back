@@ -9,5 +9,6 @@ const usersController = new UsersController();
 
 usersRoutes.post("/", usersController.create);
 usersRoutes.post("/favorite-foods",ensureAuthenticated, usersController.addMealToFavorite);
+usersRoutes.get("/",ensureAuthenticated, usersController.getUserType);
 
 module.exports = usersRoutes

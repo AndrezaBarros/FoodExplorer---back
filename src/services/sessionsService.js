@@ -14,6 +14,8 @@ class SessionsService {
         if (!user) {
             throw new AppError("Email e/ou senha incorreta", 401);
         }
+
+        return user;
     }
 
     async verifyingPassword({password, email}) {

@@ -8,14 +8,14 @@ class SessionsController {
         const sessionsRepository = new SessionsRepository();
         const sessionsService = new SessionsService(sessionsRepository);
 
-        await sessionsService.verifyingData(email);
+        const user = await sessionsService.verifyingData(email);
 
         await sessionsService.verifyingPassword({ password, email });
 
         const token = await sessionsService.createToken(email);
 
 
-        return response.json(token);
+        return response.json({token, user});
     }
 }
 

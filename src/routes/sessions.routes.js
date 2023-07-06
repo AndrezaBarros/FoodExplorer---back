@@ -6,6 +6,6 @@ const ensureAuthenticated = require("../middleware/ensureAuthenticated");
 
 const sessionsController = new SessionsController();
 
-sessionsRoutes.post("/", ensureAuthenticated, sessionsController.create);
+sessionsRoutes.post("/", sessionsController.create);
 
 module.exports = sessionsRoutes
