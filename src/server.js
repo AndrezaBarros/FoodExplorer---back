@@ -4,13 +4,16 @@ const database = require("./database/sqlite");
 const AppError = require("./utils/appError");
 const routes = require("./routes");
 const cors = require("cors");
+const uploadConfig = require("./configs/upload");
 
 const app = express();
 const PORT = 3333;
 
 database();
 
-app.use(express.json())
+app.use(express.json());
+
+app.use("/files", express.static(uploadConfig.UPLOADS_FOLDER));
 
 app.use(cors());
 

@@ -1,19 +1,21 @@
+const DiskStorage = require("../providers/DiskStorage");
 class MealService {
     constructor(mealRepository) {
         this.mealRepository = mealRepository;
     }
 
-    async execute({ name, description, category, price, created_by, ingredients, imageMealFilename }) {
+    async configMealImage({image, meal_id }) {
         const diskStorage = new DiskStorage();
 
-        if(meal.image) {
-            await diskStorage.deleteFile(meal.image);
-        }
+        const filename = await diskStorage.saveFile(image);
+        
+        await this.mealRepository.uploadMealImage({filename, meal_id });
+    }
 
-        const filename = await diskStorage.saveFile(imageMealFilename);
+    async execute({ name, description, category, price, created_by, ingredients }) {
 
         const meal_id = await this.mealRepository.create({
-            name, description, category, price, created_by, filename
+            name, description, category, price, created_by
         });
 
         const ingredientsInsert = ingredients.map(name => {
@@ -25,6 +27,8 @@ class MealService {
         });
 
         await this.mealRepository.createIngredients(ingredientsInsert);
+
+        return meal_id
     }
 }
 
