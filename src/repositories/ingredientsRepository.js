@@ -6,6 +6,7 @@ class IngredientsRepository {
 
         return ingredients;
     }
+    
 }
 
 module.exports = IngredientsRepository;

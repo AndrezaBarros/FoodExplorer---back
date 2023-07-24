@@ -30,6 +30,49 @@ class MealService {
 
         return meal_id
     }
+
+    async update({name, description, category, ingredients, price, id, created_by }) {
+        let meal = await this.mealRepository.findMeal({id});
+
+        if(!meal) {
+            throw new AppError("Usuário não encontrado");
+        }
+
+        meal.name = name ?? meal.name;
+        meal.description = description ?? meal.description; 
+        meal.category = category ?? meal.category; 
+        meal.price = price ?? meal.price; 
+
+        await this.mealRepository.deletingCurrentListIngredients({id});
+
+        const ingredientsInsert = ingredients.map(ingredient => {
+            return {
+                meal_id: id,
+                name: ingredient.name,
+                created_by
+            }
+        });
+
+        await this.mealRepository.insertingNewIngredientsList({ingredientsInsert});
+
+        meal = await this.mealRepository.update({name, description, category, price, id});
+
+        return meal;
+    }
+
+    async index({name, user_id, userType }) {
+        let meals = [];
+
+        if(userType == "Client") {
+            meals = await this.mealRepository.indexForClient({name, meals});
+
+            return meals;
+        }
+
+        meals = await this.mealRepository.indexForClient({name, user_id, meals});
+
+        return meals;
+    }
 }
 
 module.exports = MealService;

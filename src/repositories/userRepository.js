@@ -23,6 +23,12 @@ class UserRepository {
             meal_id
         });
     }
+
+    async getUserType({user_id}) {
+        const userType = await knex("users").select("type").where("id", user_id);
+
+        return userType;
+    }
 }
 
 module.exports = UserRepository;

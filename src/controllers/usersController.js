@@ -1,4 +1,3 @@
-const knex = require("../database/knex");
 const UserRepository = require("../repositories/userRepository");
 const UserService = require("../services/userService");
 
@@ -17,7 +16,8 @@ class UsersController {
     async getUserType(request, response) {
         const user_id = request.user.id;
 
-        const userType = await knex("users").select("type").where("id", user_id);
+        const userRepository = new UserRepository();
+        const userType = await userRepository.getUserType({ user_id });
 
         return userType;
     }
