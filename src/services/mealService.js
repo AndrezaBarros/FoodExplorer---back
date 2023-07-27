@@ -1,4 +1,5 @@
 const DiskStorage = require("../providers/DiskStorage");
+const AppError = require("../utils/appError")
 class MealService {
     constructor(mealRepository) {
         this.mealRepository = mealRepository;
@@ -69,7 +70,7 @@ class MealService {
             return meals;
         }
 
-        meals = await this.mealRepository.indexForClient({name, user_id, meals});
+        meals = await this.mealRepository.indexForRestaurant({name, user_id, meals});
 
         return meals;
     }
