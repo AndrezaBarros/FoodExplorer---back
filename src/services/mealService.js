@@ -1,4 +1,4 @@
-const DiskStorage = require("../providers/DiskStorage");
+const DiskStorage = require("../providers/diskStorage");
 const AppError = require("../utils/appError")
 class MealService {
     constructor(mealRepository) {
