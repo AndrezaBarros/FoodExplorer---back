@@ -19,10 +19,10 @@ class MealService {
             name, description, category, price, created_by
         });
 
-        const ingredientsInsert = ingredients.map(name => {
+        const ingredientsInsert = ingredients.map(ingredient => {
             return {
                 meal_id,
-                name,
+                name: ingredient.name,
                 created_by
             }
         });
