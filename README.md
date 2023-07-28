@@ -19,3 +19,9 @@ API do projeto final da RocketSeat, consistindo em um app de pedidos a restauran
 * Insomnia
 * Beekeeper
 
+📓 Executar o projeto
+* Clonar através do link => https://github.com/AndrezaBarros/FoodExplorer---back
+* Executar o comando npm run dev no terminal
+
+🔗 Link deploy
+https://foodexplorer-api-g8xj.onrender.com
